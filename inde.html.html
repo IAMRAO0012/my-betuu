@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Betuu ❤️ Forever</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap');
+        
+        body, html { margin: 0; padding: 0; overflow-x: hidden; font-family: 'Poppins', sans-serif; background: #000; color: white; scroll-behavior: smooth; }
+        
+        .stage { position: absolute; width: 100%; height: 100vh; display: none; overflow: hidden; transition: opacity 1.5s; }
+        #scene1 { display: block; background: linear-gradient(135deg, #ffc0cb 0%, #ffecf2 100%); color: #b30059; }
+        #scene2, #scene3, #scene4, #scene5 { background: linear-gradient(135deg, #fce4ec 0%, #ffe0b2 100%); color: #b30059; }
+        #scene6 { background: radial-gradient(circle, #2c001e 0%, #000 100%); }
+        #letter-scene { background: #fff0f3; color: #b30059; height: auto; min-height: 100vh; display: none; padding: 50px 20px; position: relative; overflow-y: auto; }
+
+        .character { position: absolute; bottom: 5%; width: 220px; z-index: 5; transition: all 2.5s ease; }
+        .paper { width: 85%; max-width: 500px; background: #fffdf5; margin: 80px auto; padding: 30px; border-radius: 8px; transform: scaleY(0); transform-origin: top; transition: 1s; text-align: center; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .open { transform: scaleY(1) !important; }
+        
+        .popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); background: white; padding: 30px; border-radius: 20px; text-align: center; z-index: 10000; transition: 0.5s; color: #b30059; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .popup.active { transform: translate(-50%, -50%) scale(1); }
+        
+        .main-btn { padding: 12px 35px; font-size: 18px; cursor: pointer; background: #ff4d6d; color: white; border: none; border-radius: 50px; margin: 10px; transition: 0.3s; }
+        
+        #ring-container { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+        #the-ring { width: 150px; transition: transform 0.3s ease; z-index: 10; }
+        #slider-box { margin-top: 40px; text-align: center; width: 80%; max-width: 400px; color: white; z-index: 10; }
+        input[type=range] { width: 100%; accent-color: #ff4d6d; cursor: pointer; }
+        
+        .final-msg { font-family: 'Dancing Script', cursive; font-size: 60px; color: #ff4d6d; margin: 20px 0; }
+        .heart-rain { position: fixed; color: #ff4d6d; font-size: 25px; pointer-events: none; z-index: 9999; animation: heartFloat 4s linear forwards; }
+        @keyframes heartFloat { 0% { transform: translateY(110vh) scale(1); opacity: 1; } 100% { transform: translateY(-10vh) scale(1.5); opacity: 0; } }
+        .magic-glow { filter: drop-shadow(0 0 30px #fff) brightness(1.2) !important; }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop><source src="himanii.mp3" type="audio/mpeg"></audio>
+
+    <div id="start-overlay" style="position:fixed; width:100%; height:100%; background:#ffc0cb; display:flex; justify-content:center; align-items:center; z-index:9999;">
+        <div style="text-align:center;">
+            <h1 style="color:white; font-family:'Dancing Script', cursive; font-size:50px;">For My Betuu... ❤️</h1>
+            <button class="main-btn" onclick="startStory()">❤️ Tap to Start Our Story ❤️</button>
+        </div>
+    </div>
+
+    <div id="next-pop" class="popup">
+        <h3 id="pop-title">Betuu... Aage chalein? ❤️</h3>
+        <button id="pop-btn" class="main-btn">Next Page ➡️</button>
+    </div>
+
+    <div id="scene1" class="stage">
+        <div style="position:absolute; top:15%; width:100%; text-align:center;">
+            <p id="s1l1" style="font-size:32px; font-weight:bold; opacity:0; transition:1.5s;">Betuu…</p>
+            <p id="s1l2" style="font-size:32px; font-weight:bold; opacity:0; transition:1.5s;">aaj hum thoda serious hai…</p>
+            <p id="s1l3" style="font-size:32px; font-weight:bold; opacity:0; transition:1.5s;">Yeh koi normal cartoon moment<br>nahi hai…</p>
+        </div>
+        <img src="vika-removebg-preview.png" id="h1" class="character" style="left:-300px;">
+        <img src="himani-removebg-preview.png" id="b1" class="character" style="right:5%; opacity:0;">
+    </div>
+
+    <div id="scene2" class="stage">
+        <div id="p2" class="paper"><div id="tw2"></div><div id="cb2" style="display:none; justify-content:center; margin-top:20px;"><button class="main-btn" onclick="hS2('YES')">YES ❤️</button><button class="main-btn" style="background:#ffb6c1" onclick="hS2('NO')">NO 😌</button></div></div>
+        <img src="vika-removebg-preview.png" class="character" style="left:10%;"><img src="himani-removebg-preview.png" class="character" style="right:10%;">
+    </div>
+
+    <div id="scene3" class="stage">
+        <div id="p3" class="paper"><div id="tw3"></div><div id="cb3" style="display:none; justify-content:center; margin-top:20px;"><button class="main-btn" onclick="hS3('YES')">Yes, of course ❤️</button><button class="main-btn" style="background:#ffb6c1" onclick="hS3('NO')">No 😌</button></div></div>
+        <img src="vika-removebg-preview.png" class="character" style="left:10%;"><img src="himani-removebg-preview.png" class="character" style="right:10%;">
+    </div>
+
+    <div id="scene4" class="stage">
+        <div id="p4" class="paper"><div id="tw4"></div><div id="cb4" style="display:none; justify-content:center; margin-top:20px;"><button class="main-btn" onclick="hS4('YES')">💖 YES</button><button class="main-btn" style="background:#ffb6c1" onclick="hS4('NO')">😌 NO</button></div></div>
+        <img src="vika-removebg-preview.png" class="character" style="left:10%;"><img src="himani-removebg-preview.png" class="character" style="right:10%;">
+    </div>
+
+    <div id="scene5" class="stage">
+        <div id="p5" class="paper"><div id="tw5"></div><div id="cb5" style="display:none; justify-content:center; margin-top:20px;"><button class="main-btn" onclick="hS5('YES')">💖 YES</button><button class="main-btn" style="background:#ffb6c1" onclick="hS5('NO')">😌 NO</button></div></div>
+        <img src="vika-removebg-preview.png" class="character" style="left:10%;"><img src="himani-removebg-preview.png" class="character" style="right:10%;">
+    </div>
+
+    <div id="scene6" class="stage">
+        <div id="ring-container">
+            <div id="magic-msg" style="text-align:center; font-size:22px; min-height:100px; padding:20px; color:white;"></div>
+            <img src="ring.png" id="the-ring">
+            <div id="slider-box">
+                <p id="size-chart-text" style="font-size:20px; color:#ffb6c1; margin-bottom:10px;">Ring Size: 1</p>
+                <input type="range" id="ring-slider" min="1" max="15" value="1">
+                <p style="font-size:12px; margin-top:5px;">(Ring ko perfect size tak slide karke dekhiye...)</p>
+                <button id="final-letter-btn" class="main-btn" style="display:none; margin-top:30px;" onclick="showFinalLetter()">Read Vikas's Final Message ❤️</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="letter-scene" class="stage">
+        <div style="text-align:center; width:100%;">
+            <h1 class="final-msg">I LOVE YOU</h1>
+            <h1 class="final-msg" style="font-size:80px;">BETUU ❤️</h1>
+            <div style="margin-top:50px; font-size:24px; line-height:2;">
+                <p>Har din.</p>
+                <p>Har haal mein.</p>
+                <p>Hamesha.....</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const music = document.getElementById('bgMusic');
+
+        function startStory() {
+            document.getElementById('start-overlay').style.display = 'none';
+            music.play();
+            setTimeout(() => {
+                document.getElementById('h1').style.left = "15%";
+                document.getElementById('b1').style.opacity = "1";
+            }, 1000);
+            setTimeout(() => s1l1.style.opacity = "1", 3000);
+            setTimeout(() => s1l2.style.opacity = "1", 5500);
+            setTimeout(() => s1l3.style.opacity = "1", 8000);
+            setTimeout(() => {
+                document.getElementById('next-pop').classList.add('active');
+                document.getElementById('pop-btn').onclick = function () {
+                    transition('scene1', 'scene2', 'p2', `Betuu…\nkya aapko yaad hai\nwoh pehla message…\njahan se sab shuru hua tha?`, "tw2", "cb2");
+                };
+            }, 11000);
+        }
+
+        function transition(hideId, showId, paperId, text, twId, cbId) {
+            document.getElementById('next-pop').classList.remove('active');
+            document.getElementById(hideId).style.display = 'none';
+            document.getElementById(showId).style.display = 'block';
+            setTimeout(() => document.getElementById(paperId).classList.add('open'), 500);
+            setTimeout(() => runTypewriter(text, twId, cbId), 1500);
+        }
+
+        function runTypewriter(text, targetId, btnId) {
+            let i = 0;
+            let target = document.getElementById(targetId);
+            target.innerHTML = "";
+            function type() {
+                if (i < text.length) {
+                    target.innerHTML += text.charAt(i) === '\n' ? '<br>' : text.charAt(i);
+                    i++;
+                    setTimeout(type, 40);
+                } else {
+                    if (btnId) document.getElementById(btnId).style.display = 'flex';
+                }
+            }
+            type();
+        }
+
+        function hS2(choice) {
+            if (choice === 'YES') {
+                document.getElementById('cb2').style.display = 'none';
+                runTypewriter(`Mujhe yaad hai woh pehla message…\nShayad us waqt normal sa laga tha…\npar pata nahi tha\nki wahi se kahani shuru ho jayegi… ✨`, "tw2", null);
+                setTimeout(() => {
+                    document.getElementById('next-pop').classList.add('active');
+                    document.getElementById('pop-btn').onclick = function () {
+                        transition('scene2', 'scene3', 'p3', `Betuu…\nkya aapko yaad hai\njab shuru shuru mein main aapse kitni politely baat karta tha?\n\nAur aaj…\nkya main aapki zindagi mein\nek special jagah bana paya hoon?`, "tw3", "cb3");
+                    };
+                }, 8000);
+            } else { alert("Phir se sochiye Betuu 😌"); }
+        }
+
+        function hS3(choice) {
+            if (choice === 'YES') {
+                document.getElementById('cb3').style.display = 'none';
+                document.getElementById('tw3').innerHTML = "Shayad shuruaat sirf ek polite baat se hui thi…<br><br>Dheere dheere woh baatein aadat ban gayi…<br><br>Aur aaj… aap meri zindagi ka ek khaas hissa ho… 💘";
+                setTimeout(() => {
+                    document.getElementById('next-pop').classList.add('active');
+                    document.getElementById('pop-btn').onclick = function () {
+                        transition('scene3', 'scene4', 'p4', `Betuu…\n\nJab main kuch der ke liye message nahi karta…\ntoh kya thoda sa ajeeb lagta hai? 🥺💬`, "tw4", "cb4");
+                    };
+                }, 4000);
+            } else { alert("Sach mein? 🥺"); }
+        }
+
+        function hS4(choice) {
+            if (choice === 'YES') {
+                document.getElementById('cb4').style.display = 'none';
+                document.getElementById('tw4').innerHTML = "Hmm… shayad isliye…<br><br>kyunki aadat ho gayi hai har roz baat karne ki…<br>Aur jab aadat dil se jud jaaye…<br>toh uski kami mehsoos hoti hi hai… 💞";
+                setTimeout(() => {
+                    document.getElementById('next-pop').classList.add('active');
+                    document.getElementById('pop-btn').onclick = function() {
+                        transition('scene4', 'scene5', 'p5', `Betuu…\n\nKya aap imagine kar sakti hain…\nki yeh sab sirf ek din ka nahi…\n\nHar din ka ho...mein har din aapko ese hi special feel karaun to? 💫`, "tw5", "cb5");
+                    };
+                }, 4000);
+            } else { alert("Phir se sochiye Betuu 😌"); }
+        }
+
+        function hS5(choice) {
+            if (choice === 'YES') {
+                document.getElementById('cb5').style.display = 'none';
+                document.getElementById('tw5').innerHTML = "Har roz wahi excitement... har roz wahi sukoon... ✨";
+                setTimeout(() => {
+                    document.getElementById('next-pop').classList.add('active');
+                    document.getElementById('pop-btn').innerHTML = "Chalo ✨";
+                    document.getElementById('pop-btn').onclick = function () {
+                        document.getElementById('next-pop').classList.remove('active');
+                        document.getElementById('scene5').style.display = 'none';
+                        document.getElementById('scene6').style.display = 'block';
+                    };
+                }, 2000);
+            } else { alert("Phir se bataiye 😌"); }
+        }
+
+        document.getElementById('ring-slider').oninput = function() {
+            let val = this.value;
+            let scale = 0.6 + (val * 0.1);
+            document.getElementById('the-ring').style.transform = `scale(${scale})`;
+            document.getElementById('size-chart-text').innerHTML = "Ring Size: " + val;
+            if(val == 8) {
+                document.getElementById('the-ring').classList.add('magic-glow');
+                document.getElementById('magic-msg').innerHTML = `Betuu…<br><br>Humari shaadi ho chuki hai… par mera pyaar har din naya hota hai…<br><br>Jaise yeh ring perfect size pe ruk gayi… waise hi meri duniya aap par ruk gaya hai… ❤️`;
+                document.getElementById('final-letter-btn').style.display = 'inline-block';
+            } else {
+                document.getElementById('the-ring').classList.remove('magic-glow');
+                document.getElementById('magic-msg').innerHTML = "";
+                document.getElementById('final-letter-btn').style.display = 'none';
+            }
+        };
+
+        function showFinalLetter() {
+            document.getElementById('scene6').style.display = 'none';
+            document.getElementById('letter-scene').style.display = 'flex';
+            document.getElementById('letter-scene').style.alignItems = 'center';
+            setInterval(createHeart, 150);
+        }
+
+        function createHeart() {
+            const h = document.createElement('div');
+            h.className = 'heart-rain';
+            h.innerHTML = '❤️';
+            h.style.left = Math.random() * 100 + 'vw';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 4000);
+        }
+    </script>
+</body>
+</html>
